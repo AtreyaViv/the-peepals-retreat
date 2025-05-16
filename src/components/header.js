@@ -32,7 +32,10 @@ const Header = () => {
         <div className="header-container">
           {/* Logo */}
           <div className="logo">
-            <img src={logo1} alt="Hotel Logo" className ="site-logo"/>
+            <Link to="/" onClick={closeMenu}>
+              <img src={logo1} alt="Hotel Logo" className="site-logo" />
+            </Link>
+
           </div>
 
           {/* Nav items */}
