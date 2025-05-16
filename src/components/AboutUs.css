@@ -1,0 +1,141 @@
+.about-us-container {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* About Section */
+.au-about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 40px auto;
+  text-align: left;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.au-about-text {
+  width: 60%;
+}
+
+.au-about-title {
+  font-size: 28px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.au-about-subtitle {
+  font-size: 18px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #d3d3d3;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.au-about-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+
+.au-about-highlight {
+  font-size: 16px;
+  font-style: italic;
+  color: #0066cc;
+  margin-top: 10px;
+}
+
+.au-features-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.au-features-list li {
+  font-size: 16px;
+  color: #444;
+}
+
+.au-about-image img {
+  width: 200px;
+  height: 300px;
+  border: 5px solid #ffcc00;
+  display: block;
+  object-fit: cover;
+}
+
+/* ---------------- MOBILE STYLES ---------------- */
+@media (max-width: 768px) {
+  .au-hero-section {
+    height: 180px;
+    padding: 0 10px;
+  }
+
+  .au-hero-title {
+    font-size: 28px;
+  }
+
+  .au-breadcrumb {
+    font-size: 13px;
+    padding: 10px 5%;
+  }
+
+  .au-about-content {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 90%;
+    margin: 30px auto;
+  }
+
+  .au-about-text {
+    width: 100%;
+  }
+
+  .au-about-title {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .au-about-subtitle {
+    font-size: 15px;
+    text-align: center;
+    display: block;
+  }
+
+  .au-about-description,
+  .au-about-highlight {
+    font-size: 14px;
+    text-align: justify;
+  }
+
+  .au-about-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .au-about-image img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+  }
+
+  .au-features-list {
+    font-size: 14px;
+    margin-left: 20px;
+  }
+
+  .au-features-list li {
+    font-size: 14px;
+  }
+}

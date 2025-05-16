@@ -1,0 +1,248 @@
+* {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+.home-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.left-section {
+  flex: 1 1 300px;
+  max-width: 500px;
+}
+
+/* Container Section */
+.testimonial-section {
+  background-color: #2A4630;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+@media (min-width: 768px) {
+  .testimonial-section {
+    height: 103vh;
+  }
+}
+
+.testimonial-heading {
+  font-family: "Monotype Corsiva", "Great Vibes", cursive;
+  font-size: 50px;
+  font-weight: bold;
+  color: #D7BC77;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Frame Styling */
+.testimonial-frame {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.quote-frame-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.testimonial-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 50px 25px 60px 25px; /* adjust to fit your PNG */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.testimonial-text {
+  font-size: 16px;
+  font-weight: bold;
+  color: #D7BC77;
+  text-align: center;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.testimonial-name {
+  font-size: 14px;
+  font-weight: normal;
+  color: #D7BC77;
+  align-self: flex-end;
+  margin-top: auto;
+  margin: bottom 1px;
+}
+
+/* Optional: Keep your animations */
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+
+/* Right Column */
+.right-section {
+  flex: 2 1 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Executive Room Section */
+.executive-room,
+.banquet-lawn {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: whitesmoke;
+  border-radius: 8px;
+  border: 3px solid #2A4630;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.room-image img,
+.banquet-images img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.room-info,
+.banquet-info {
+  flex: 1 1 250px;
+}
+
+.room-info h2 {
+  font-family: manhattan;
+  font-size: 38px;
+  color: #2A4630;
+}
+
+.room-info p {
+  font-size: 18px;
+  color: #2A4630;
+  margin: 10px 0;
+}
+
+.room-info .btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #c9a458;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.room-info .btn:hover {
+  background-color: #b28e36;
+}
+
+.banquet-info h2 {
+  font-family: manhattan;
+  font-size: 38px;
+  color: #2A4630;
+}
+
+.banquet-info p {
+  font-size: 18px;
+  color: #2A4630;
+  margin: 10px 0;
+}
+
+.banquet-info .btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #c9a458;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.banquet-info .btn:hover {
+  background-color: #b28e36;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .testimonial-section {
+    width: 100%;
+  }
+
+  .executive-room,
+  .banquet-lawn {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .room-image img,
+  .banquet-images img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .executive-room,
+  .banquet-lawn {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .room-info,
+  .banquet-info {
+    text-align: center;
+  }
+
+  .room-image img,
+  .banquet-images img {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .testimonial-frame {
+    max-width: 90%;
+  }
+
+  .testimonial-text {
+    width: 100%;
+  }
+}

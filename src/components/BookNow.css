@@ -1,0 +1,188 @@
+
+  
+  /* Book Your Event Section */
+  .book-your-event {
+    margin: 50px auto;
+    text-align: left;
+    background-color: whitesmoke;
+  }
+  
+  .event-title {
+    font-size: 2rem;
+    font-family: "Georgia", serif;
+    font-style: italic;
+    font-weight: bold;
+  }
+  
+  .event-subtext {
+    color: gray;
+    font-size: 1rem;
+  }
+  
+  .event-underline {
+    width: 50px;
+    height: 3px;
+    background-color: lightgreen;
+    margin: 10px auto;
+  }
+  
+  .booking-wrapper {
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .booking-container {
+    background-color: #1f3b2e;
+    padding: 2rem;
+    border-radius: 12px;
+    color: white;
+    width: 100%;
+    max-width: 650px;
+  }
+  
+  .booking-toggle {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    position: relative;
+    background-color: #2e4f3d;
+    border-radius: 30px;
+    overflow: hidden;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  
+  .booking-toggle span {
+    flex: 1;
+    padding: 0.75rem;
+    text-align: center;
+    z-index: 1;
+    transition: color 0.3s;
+  }
+  
+  .booking-toggle .active {
+    color: #1f3b2e;
+    font-weight: bold;
+    background-color: #fff;
+    border-radius: 30px;
+  }
+  
+  .booking-toggle .slider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 0;
+    border-radius: 30px;
+    transition: transform 0.3s ease;
+  }
+  
+  .booking-toggle .slider.event {
+    transform: translateX(100%);
+  }
+  .booking-toggle .slider.room {
+    transform: translateX(0%);
+  }
+  
+  .booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+  }
+  
+  .row-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .row-group input,
+  .row-group select {
+    flex: 1;
+  }
+  
+  .initials-name-group {
+    flex-wrap: nowrap;
+  }
+
+  .row-group.dates-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .date-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .date-group label {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: white;
+    font-weight: 500;
+  }
+  
+  /* Responsive stack */
+  @media (max-width: 768px) {
+    .row-group.dates-row {
+      flex-direction: column;
+    }
+  }
+  
+  
+  .guest-section label {
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  
+  .guest-counter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .guest-counter button {
+    background-color: #fff;
+    border: none;
+    padding: 0.4rem 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  button[type="submit"] {
+    background-color: #e4c276;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .initials-name-group {
+      flex-direction: column;
+    }
+  
+    .row-group {
+      flex-direction: column;
+    }
+  
+    .guest-counter {
+      justify-content: space-between;
+    }
+  }
+  
+  

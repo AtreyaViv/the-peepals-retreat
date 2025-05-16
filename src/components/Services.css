@@ -1,0 +1,76 @@
+.s-amenities-container {
+  font-family: "Arial", sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Content Section */
+.s-content-container {
+  width: 80%;
+  max-width: 1000px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.s-content-title {
+  font-size: 28px;
+  font-weight: bold;
+  font-style: italic;
+}
+
+.s-content-subtitle {
+  font-size: 18px;
+  color: #888;
+  font-style: italic;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #d3d3d3;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.s-content-description {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+
+
+/* -------------------- MOBILE RESPONSIVE -------------------- */
+@media (max-width: 768px) {
+  .s-hero-section {
+    height: 180px;
+    padding: 0 15px;
+  }
+
+  .s-hero-title {
+    font-size: 26px;
+    padding: 0 10px;
+  }
+
+  .s-breadcrumb {
+    font-size: 12px;
+    padding: 12px 5%;
+    text-align: center;
+  }
+
+  .s-content-container {
+    width: 90%;
+    margin: 25px auto;
+  }
+
+  .s-content-title {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .s-content-subtitle {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .s-content-description {
+    font-size: 15px;
+    text-align: justify;
+  }
+}

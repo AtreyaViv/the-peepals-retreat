@@ -1,0 +1,150 @@
+.values-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 50px auto;
+  gap: 20px;
+  background-color: whitesmoke;
+}
+
+/* Image Gallery */
+.values-images {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .image-large {
+    width: 510px;
+    height: 300px;
+    border-radius: 5px;
+  }
+  
+  .image-small-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .image-small {
+    width: 250px;
+    height: 150px;
+    border-radius: 5px;
+  }
+  
+  /* Values Section */
+  .values-content {
+    width: 50%;
+  }
+  
+  .values-title {
+    font-size: 28px;
+    font-weight: bold;
+    font-style: italic;
+  }
+  
+  .values-subtitle {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #d3d3d3;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+  /* Accordion */
+  .accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .accordion-item {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .accordion-header {
+    width: 100%;
+    padding: 12px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .accordion-header:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .accordion-content {
+    padding: 12px;
+    background-color: #f1f1f1;
+    font-size: 14px;
+  }
+  
+  .active {
+    background-color: #8aa62f;
+    color: white;
+  }
+
+  @media (max-width: 768px) {
+    .values-container {
+      flex-direction: column;
+      width: 95%;
+      margin: 30px auto;
+      padding: 10px;
+    }
+  
+    .values-images {
+      width: 100%;
+      align-items: center;
+    }
+  
+    .image-large {
+      width: 100%;
+      height: auto;
+    }
+  
+    .image-small-group {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .image-small {
+      width: 100%;
+      height: auto;
+    }
+  
+    .values-content {
+      width: 100%;
+      margin-top: 20px;
+    }
+  
+    .values-title {
+      font-size: 22px;
+      text-align: center;
+    }
+  
+    .values-subtitle {
+      font-size: 14px;
+      text-align: center;
+      display: block;
+    }
+  
+    .accordion-header {
+      font-size: 15px;
+      padding: 10px;
+    }
+  
+    .accordion-content {
+      font-size: 13px;
+      padding: 10px;
+    }
+  }

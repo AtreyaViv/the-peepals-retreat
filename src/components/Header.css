@@ -1,0 +1,152 @@
+/* Header Styling */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #D7BC77;
+  height: 50px;
+  /* Adjusted to match logo height */
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1002;
+}
+
+
+/* Logo Styling */
+.logo {
+  position: absolute;
+  left: 60px;
+  /* Creates a small gap from the left */
+  top: 1px;
+  /* Moves it up slightly */
+  height: 120px;
+  /* Adjust as needed */
+  z-index: 2;
+  /* Ensure it's above header */
+}
+
+.logo img {
+  height: 110%;
+  /* Make the logo image fit */
+}
+
+/* Navigation Menu */
+.nav-items {
+  display: flex;
+  gap: 32.75px;
+  /* Space between menu items */
+  margin-left: 222px;
+  /* Pushes nav items to the right of the logo */
+  text-transform: uppercase;
+  font-family: 'mongolian_baitiregular';
+  font-size: 16px;
+}
+
+.nav-items a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #2A4630;
+  /* Deep green text */
+  transition: color 0.3s ease;
+}
+
+.nav-items a:hover {
+  color: #3d9752;
+  /* Darker green on hover */
+}
+
+/* HAMBURGER STYLES */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  background-color: #2A4630;
+  height: 3px;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Hamburger open animation */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 992px) {
+  .hamburger {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    z-index: 1000;
+  }
+
+  .nav-items {
+    position: fixed;
+    top: 0;
+    right: -50%;
+    height: 100vh;
+    width: 50%;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(107, 142, 35, 0.95);
+    padding-top: 100px;
+    padding-left: 30px;
+    gap: 30px;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  .nav-items.active {
+    right: 0;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .logo {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1001;
+  }
+
+  .logo img {
+    max-width: 120px;
+    /* or however small you want */
+    height: auto;
+  }
+
+  header {
+    position: relative;
+  }
+}
