@@ -1,30 +1,28 @@
-import SlideShow from "./slideShow";
-import HotelInfoSection from "./hotelInfoSection";
-import Testimonial from "./testimonial";
-import ExecutiveRoom from "./executiveRoom";
-import BanquetLawn from "./banquetLawn";
-import "./Home.css"; 
+import SlideShow from './slideShow';
+import HotelInfoSection from './hotelInfoSection';
+import Testimonial from './testimonial';
+import ExecutiveRoom from './executiveRoom';
+import BanquetLawn from './banquetLawn';
 
 const Home = () => {
-    return (
-        <div>
-            <SlideShow/>
-            <HotelInfoSection />
-            <div className="home-container">
-                {/* Left section: Testimonials */}
-                <div className="left-section">
-                    <Testimonial />
-                </div>
-                
-                {/* Right section: Executive Room & Banquet Lawn */}
-                <div className="right-section">
-                    <ExecutiveRoom />
-                    <BanquetLawn />
-                </div>
-            </div>
+  return (
+    <div>
+      <SlideShow />
+      <HotelInfoSection />
+      <div className="flex flex-wrap w-full gap-5 py-5 px-0">
+        {/* Left Section - Testimonial */}
+        <div className="flex-1 min-w-[300px] max-w-[500px]">
+          <Testimonial />
         </div>
-    )
+
+        {/* Right Section - Executive Room & Banquet Lawn */}
+        <div className="flex-[2] min-w-[500px] flex flex-col gap-5">
+          <ExecutiveRoom />
+          <BanquetLawn />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Home;
-

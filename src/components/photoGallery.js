@@ -43,41 +43,42 @@ const PhotoGallery = () => {
 
   const handleImageClick = (src) => {
     const now = Date.now();
-    const timeSinceLastTap = now - lastTapRef.current;
-
-    if (timeSinceLastTap < 300) {
-      setModalImage(src); // Double-tap or double-click
+    if (now - lastTapRef.current < 300) {
+      setModalImage(src);
     }
-
     lastTapRef.current = now;
   };
 
   return (
-    <div className="photo-gallery">
+    <div className="w-full max-w-[1200px] mx-auto text-center px-4 pb-10">
       {/* Categories */}
-      <div className="gallery-categories">
+      <div className="flex justify-start sm:justify-center overflow-x-auto gap-4 mb-6 font-bold text-sm sm:text-base whitespace-nowrap">
         {categories.map((cat) => (
           <span
             key={cat.key}
-            className={selectedCategory === cat.key ? "active" : ""}
             onClick={() => setSelectedCategory(cat.key)}
+            className={`cursor-pointer px-3 py-1 border-b-2 transition-all duration-300 ${
+              selectedCategory === cat.key
+                ? "text-[#398f4c] border-[#398f4c]"
+                : "border-transparent text-gray-700"
+            }`}
           >
             {cat.name}
           </span>
         ))}
       </div>
 
-      {/* Images Grid */}
-      <div className="gallery-grid">
+      {/* Gallery Grid */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {filteredImages.map((img, index) => (
           <img
             key={index}
             src={img.src}
             alt="Gallery"
-            className="gallery-img"
             loading="lazy"
+            className="w-full h-auto rounded-md transform transition-transform duration-300 hover:scale-105"
             onClick={() => handleImageClick(img.src)}
-            onDoubleClick={() => setModalImage(img.src)} // desktop fallback
+            onDoubleClick={() => setModalImage(img.src)}
           />
         ))}
       </div>

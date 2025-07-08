@@ -6,7 +6,7 @@ import ScrollToTop from './components/scrollToTop';
 import Loader from './components/loader';
 import Home from './components/home';
 
-// Lazy load route components
+// //Lazy load route components
 const AboutUs = lazy(() => import('./components/aboutUs'));
 const Services = lazy(() => import('./components/services'));
 const Accommodations = lazy(() => import('./components/accommodations'));
@@ -33,7 +33,8 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
         </Routes>
       </Suspense>
-
+      
+      <div className="pb-0.5 lg:pb-0.5"> </div>
       <Footer />
     </Router>
   );

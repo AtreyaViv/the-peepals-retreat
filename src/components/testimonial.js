@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import quoteFrame from '../assets/quote.png';
+import quoteFrame from "../assets/quote.png";
 
 const testimonials = [
   { name: "Amit Sharma", review: "The service was outstanding! The staff made sure that every little detail was taken care of. I will definitely come back for another stay." },
@@ -20,26 +20,40 @@ const Testimonial = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // Start fade-out animation
+      setFade(false);
       setTimeout(() => {
         setIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-        setFade(true); // Start fade-in animation
-      }, 500); // Wait for fade-out before changing text
-    }, 7000); // Change testimonial every 4 seconds
-
+        setFade(true);
+      }, 500);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="testimonial-section">
-      <h2 className="testimonial-heading">Testimonial</h2>
-      <div className="testimonial-frame">
-        <img src={quoteFrame} alt="Quote frame" className="quote-frame-img" />
-        <div className="testimonial-content">
-          <p className={`testimonial-text ${fade ? "fade-in" : "fade-out"}`}>
+    <section className="bg-[#2A4630] px-4 py-10 md:py-20 flex flex-col items-center">
+      <h2 className="text-[#D7BC77] text-[38px] md:text-[50px] font-bold font-[cursive] text-center mb-8 drop-shadow-md">
+        Testimonial
+      </h2>
+
+      <div className="relative w-[330px] h-[280px] md:w-[400px] md:h-[330px]">
+        <img
+          src={quoteFrame}
+          alt="Quote Frame"
+          className="absolute inset-0 w-full h-full object-contain"
+        />
+        <div className="absolute inset-0 flex flex-col justify-center items-center px-6 pt-10 pb-12">
+          <p
+            className={`text-[#D7BC77] text-[14px] text-center font-semibold transition-all duration-500 ease-in-out ${
+              fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+            }`}
+          >
             {testimonials[index].review}
           </p>
-          <p className={`testimonial-name ${fade ? "fade-in" : "fade-out"}`}>
+          <p
+            className={`text-[#D7BC77] text-sm font-normal mt-auto self-end transition-all duration-500 ease-in-out ${
+              fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
+            }`}
+          >
             – {testimonials[index].name}
           </p>
         </div>
@@ -49,47 +63,3 @@ const Testimonial = () => {
 };
 
 export default Testimonial;
-
-// const TestimonialSection = () => {
-
-
-//     const [index, setIndex] = useState(0);
-
-//     // Auto-slide every 5 seconds
-//     useEffect(() => {
-//         const interval = setInterval(() => {
-//             setIndex((prevIndex) => (prevIndex + 2) % reviews.length);
-//         }, 5000);
-
-//         return () => clearInterval(interval);
-//     }, [reviews.length]);
-
-//     // Manual navigation
-//     const nextReviews = () => {
-//         setIndex((prevIndex) => (prevIndex + 2) % reviews.length);
-//     };
-
-//     const prevReviews = () => {
-//         setIndex((prevIndex) => (prevIndex - 2 + reviews.length) % reviews.length);
-//     };
-
-//     return (
-//         <div className="testimonial-section">
-//             <h2>Testimonials</h2>
-//             <div className="testimonial-container">
-//                 {reviews.slice(index, index + 2).map((item, idx) => (
-//                     <div key={idx} className="testimonial-card">
-//                         <p>{item.review}</p>
-//                         <span className="testimonial-name">- {item.name}</span>
-//                     </div>
-//                 ))}
-//             </div>
-//             <div className="testimonial-buttons">
-//                 <button onClick={prevReviews}>&#9665;</button>
-//                 <button onClick={nextReviews}>&#9655;</button>
-//             </div>
-//         </div>
-//     );
-//};
-
-// export default TestimonialSection;

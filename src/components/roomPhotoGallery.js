@@ -29,29 +29,29 @@ const RoomPhotoGallery = () => {
   const handleImageClick = (src) => {
     const now = Date.now();
     if (now - lastTapRef.current < 300) {
-      setViewImage(src); // double-tap/double-click
+      setViewImage(src);
     }
     lastTapRef.current = now;
   };
 
   return (
-    <div className="room-photo-gallery">
-      {/* Main Section */}
-      <div className="room-photo-gallery__main">
+    <div className="flex flex-col gap-3 max-w-[900px] mx-auto px-4 sm:px-0 my-8">
+      {/* Top Section */}
+      <div className="flex flex-col sm:flex-row gap-3">
         <img
           src={images[0]}
           alt="Main Hotel"
-          className="main-image"
+          className="w-full sm:w-[65%] h-[220px] sm:h-[300px] object-cover rounded-md"
           onClick={() => handleImageClick(images[0])}
           onDoubleClick={() => setViewImage(images[0])}
         />
-        <div className="room-photo-gallery__side">
+        <div className="flex sm:flex-col gap-3 w-full sm:w-[35%]">
           {[images[1], images[2]].map((img, i) => (
             <img
               key={i}
               src={img}
               alt={`Room ${i + 1}`}
-              className="side-image"
+              className="w-[calc(50%-6px)] sm:w-full h-[120px] sm:h-[145px] object-cover rounded-md"
               onClick={() => handleImageClick(img)}
               onDoubleClick={() => setViewImage(img)}
             />
@@ -59,29 +59,29 @@ const RoomPhotoGallery = () => {
         </div>
       </div>
 
-      {/* Bottom Section */}
-      <div className="room-photo-gallery__bottom">
+      {/* Bottom Thumbnails */}
+      <div className="flex flex-wrap justify-between gap-2">
         {visibleImages.slice(3, 6).map((src, index) => (
           <img
             key={index}
             src={src}
             alt={`Gallery ${index + 3}`}
-            className="bottom-image"
+            className="w-[48%] sm:w-[23%] h-[90px] sm:h-[100px] object-cover rounded-md"
             onClick={() => handleImageClick(src)}
             onDoubleClick={() => setViewImage(src)}
           />
         ))}
 
-        {/* Last image with "+x" */}
+        {/* "+X more" Thumbnail */}
         {remainingImages > 0 && (
           <div
-            className="room-photo-gallery__more"
+            className="relative w-[48%] sm:w-[23%] h-[90px] sm:h-[100px] cursor-pointer"
             onClick={() => setIsModalOpen(true)}
           >
             <img
               src={visibleImages[6]}
               alt="More Photos"
-              className="bottom-image"
+              className="w-full h-full object-cover rounded-md"
               onClick={(e) => {
                 e.stopPropagation();
                 handleImageClick(visibleImages[6]);
@@ -91,24 +91,31 @@ const RoomPhotoGallery = () => {
                 setViewImage(visibleImages[6]);
               }}
             />
-            <div className="overlay">+{remainingImages} photos</div>
+            <div className="absolute inset-0 bg-black bg-opacity-50 text-white flex items-center justify-center font-bold text-sm sm:text-lg rounded-md">
+              +{remainingImages} photos
+            </div>
           </div>
         )}
       </div>
 
-      {/* All Images Modal */}
+      {/* Modal for All Images */}
       {isModalOpen && (
-        <div className="photo-modal">
-          <div className="photo-modal__content">
-            <button className="close-btn" onClick={() => setIsModalOpen(false)}>✖</button>
-            <div className="photo-grid">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-80 flex items-center justify-center p-4">
+          <div className="relative bg-white rounded-lg p-4 sm:p-6 w-full max-w-4xl max-h-[80%] overflow-y-auto">
+            <button
+              className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded text-sm sm:text-base"
+              onClick={() => setIsModalOpen(false)}
+            >
+              ✖
+            </button>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mt-6">
               {images.map((src, index) => (
                 <img
                   key={index}
                   src={src}
                   alt={`Modal ${index}`}
                   loading="lazy"
-                  className="modal-image"
+                  className="w-full h-[100px] sm:h-[120px] object-cover rounded-md"
                   onClick={() => handleImageClick(src)}
                   onDoubleClick={() => setViewImage(src)}
                 />
@@ -118,7 +125,7 @@ const RoomPhotoGallery = () => {
         </div>
       )}
 
-      {/* Single Image Lightbox */}
+      {/* Lightbox View */}
       <Suspense fallback={null}>
         <ImageModal src={viewImage} onClose={() => setViewImage(null)} />
       </Suspense>
