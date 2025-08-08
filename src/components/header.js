@@ -10,7 +10,6 @@ const Header = () => {
   const toggleMenu = () => setMenuOpen(prev => !prev);
   const closeMenu = () => setMenuOpen(false);
 
-  // Handle outside clicks
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (
@@ -30,17 +29,17 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full h-[50px] bg-[#D7BC77] shadow-md z-[1002] flex items-center">
-        <div className="w-full relative flex justify-center">
-          {/* Logo */}
-          <div className="absolute left-[60px] top-[0px] h-[120px] z-[2]">
+      <header className="fixed top-0 left-0 w-full bg-[#D7BC77] z-[1002] h-[50px] flex items-center shadow-md">
+        <div className="relative w-full flex justify-center">
+          {/* Logo (Overhanging) */}
+          <div className="absolute top-0 left-[60px] h-[120px] z-10">
             <Link to="/" onClick={closeMenu}>
               <img src={logo} alt="Hotel Logo" className="h-full object-contain" />
             </Link>
           </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex ml-[200px] gap-[32.75px] text-[16px] font-bold text-[#2A4630] uppercase font-[mongolian_baitiregular]">
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex ml-[200px] gap-[32.75px] text-[16px] font-bold text-[#2A4630] uppercase font-[mongolian_baitiregular] h-[50px] items-center">
             <Link to="/" onClick={closeMenu}>Home</Link>
             <Link to="/about" onClick={closeMenu}>About</Link>
             <Link to="/services" onClick={closeMenu}>Services</Link>
@@ -51,10 +50,10 @@ const Header = () => {
             <Link to="/contact" onClick={closeMenu}>Contact</Link>
           </nav>
 
-          {/* Hamburger Icon */}
+          {/* Hamburger Menu Icon */}
           <div
             ref={hamburgerRef}
-            className={`absolute right-4 top-[0px] z-[1001] lg:hidden flex flex-col justify-between w-[25px] h-[20px] cursor-pointer`}
+            className="absolute right-4 top-[0px] z-[1001] lg:hidden flex flex-col justify-between w-[25px] h-[20px] cursor-pointer"
             onClick={toggleMenu}
           >
             <span className={`bg-[#2A4630] h-[3px] rounded transition-all ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`} />
@@ -64,7 +63,7 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Menu */}
+      {/* Mobile Nav Drawer */}
       {menuOpen && (
         <nav
           ref={mobileMenuRef}
@@ -81,7 +80,7 @@ const Header = () => {
         </nav>
       )}
 
-      {/* Transparent overlay (optional for styling) */}
+      {/* Overlay */}
       {menuOpen && <div className="fixed inset-0 bg-transparent z-[999]" />}
     </>
   );

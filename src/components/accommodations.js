@@ -30,7 +30,7 @@ const Accommodations = () => {
           natural light, each room offers a warm and inviting atmosphere.
         </p>
         <p className="text-sm sm:text-base text-gray-700 leading-7 mb-4">
-          Generously sized at approximately 80–85 square meters, our Executive Rooms
+          Generously sized, our Executive Rooms
           provide the perfect balance of space and serenity—crafted to suit both your
           taste and your budget. Whether you're here for business or leisure, your
           stay is bound to be restful and memorable.

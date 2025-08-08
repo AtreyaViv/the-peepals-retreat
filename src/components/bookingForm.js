@@ -8,11 +8,20 @@ const schema = yup.object().shape({
   lastName: yup.string().required("Last name is required"),
   phone: yup.string().required("Phone number is required"),
   email: yup.string().email("Invalid email").required("Email is required"),
-  fromDate: yup.date().required("Start date is required"),
-  toDate: yup
-    .date()
-    .required("End date is required")
-    .min(yup.ref("fromDate"), "End date must be after start date"),
+  eventDate: yup.date().when("bookingType", {
+    is: "event",
+    then: (schema) => schema.required("Event date is required"),
+  }),
+  fromDate: yup.date().when("bookingType", {
+    is: "room",
+    then: (schema) => schema.required("Check-in date is required"),
+  }),
+  toDate: yup.date().when("bookingType", {
+    is: "room",
+    then: (schema) => schema
+      .required("Check-out date is required")
+      .min(yup.ref("fromDate"), "Check-out must be after check-in"),
+  }),
   guests: yup.string().when("bookingType", {
     is: "event",
     then: yup.string().required("Select number of guests"),
@@ -23,6 +32,7 @@ const schema = yup.object().shape({
 const BookingForm = () => {
   const [bookingType, setBookingType] = useState("event");
   const [roomGuests, setRoomGuests] = useState(1);
+  const [roomCount, setRoomCount] = useState(1);
   const today = new Date().toISOString().split("T")[0];
 
   const {
@@ -40,8 +50,8 @@ const BookingForm = () => {
       email: "",
       fromDate: "",
       toDate: "",
+      eventDate: "",
       eventType: "",
-      seatingType: "",
       guests: "",
       message: "",
     },
@@ -52,6 +62,7 @@ const BookingForm = () => {
     const finalData = {
       ...data,
       guests: bookingType === "room" ? roomGuests : data.guests,
+      rooms: bookingType === "room" ? roomCount : undefined,
       bookingType,
     };
     console.log("Form Submitted:", finalData);
@@ -63,29 +74,25 @@ const BookingForm = () => {
         {/* Toggle Switch */}
         <div className="flex justify-between text-sm font-medium mb-6 bg-[#2e4f3d] rounded-full relative overflow-hidden cursor-pointer">
           <span
-            className={`flex-1 text-center py-2 z-10 ${
-              bookingType === "room" ? "text-[#1f3b2e] font-bold" : "text-white"
-            }`}
+            className={`flex-1 text-center py-2 z-10 ${bookingType === "room" ? "text-[#1f3b2e] font-bold" : "text-white"
+              }`}
             onClick={() => setBookingType("room")}
           >
             Room Booking
           </span>
           <span
-            className={`flex-1 text-center py-2 z-10 ${
-              bookingType === "event" ? "text-[#1f3b2e] font-bold" : "text-white"
-            }`}
+            className={`flex-1 text-center py-2 z-10 ${bookingType === "event" ? "text-[#1f3b2e] font-bold" : "text-white"
+              }`}
             onClick={() => setBookingType("event")}
           >
             Event Booking
           </span>
           <div
-            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-white rounded-full transition-transform duration-300 ${
-              bookingType === "event" ? "translate-x-full" : ""
-            }`}
+            className={`absolute top-0 bottom-0 left-0 w-1/2 bg-white rounded-full transition-transform duration-300 ${bookingType === "event" ? "translate-x-full" : ""
+              }`}
           />
         </div>
 
-        {/* Booking Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 text-sm">
           {/* Initials + Name */}
           <div className="flex flex-col sm:flex-row gap-4">
@@ -128,59 +135,72 @@ const BookingForm = () => {
             />
           </div>
 
-          {/* Dates */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <div className="flex flex-col flex-1">
-              <label htmlFor="fromDate" className="text-white mb-1">Check-in Date</label>
+          {/* Conditional Dates */}
+          {bookingType === "event" ? (
+            <div>
+              <label className="text-white mb-1 block">Event Date</label>
               <Controller
-                name="fromDate"
+                name="eventDate"
                 control={control}
                 render={({ field }) => (
                   <input
                     type="date"
-                    id="fromDate"
                     {...field}
                     min={today}
-                    max={
-                      watch("toDate")
-                        ? new Date(new Date(watch("toDate")).getTime() - 86400000)
-                            .toISOString().split("T")[0]
-                        : undefined
-                    }
-                    onChange={(e) => {
-                      field.onChange(e);
-                      trigger("toDate");
-                    }}
-                    onBlur={() => trigger("fromDate")}
-                    className="p-2 rounded text-black"
+                    className="p-2 rounded w-full text-black"
                   />
                 )}
               />
             </div>
-
-            <div className="flex flex-col flex-1">
-              <label htmlFor="toDate" className="text-white mb-1">Check-out Date</label>
-              <Controller
-                name="toDate"
-                control={control}
-                render={({ field }) => (
-                  <input
-                    type="date"
-                    id="toDate"
-                    {...field}
-                    min={
-                      watch("fromDate")
-                        ? new Date(new Date(watch("fromDate")).getTime() + 86400000)
+          ) : (
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col flex-1">
+                <label className="mb-1">Check-in Date</label>
+                <Controller
+                  name="fromDate"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="date"
+                      {...field}
+                      min={today}
+                      max={
+                        watch("toDate")
+                          ? new Date(new Date(watch("toDate")).getTime() - 86400000)
                             .toISOString().split("T")[0]
-                        : today
-                    }
-                    onBlur={() => trigger("toDate")}
-                    className="p-2 rounded text-black"
-                  />
-                )}
-              />
+                          : undefined
+                      }
+                      onChange={(e) => {
+                        field.onChange(e);
+                        trigger("toDate");
+                      }}
+                      className="p-2 rounded text-black"
+                    />
+                  )}
+                />
+              </div>
+              <div className="flex flex-col flex-1">
+                <label className="mb-1">Check-out Date</label>
+                <Controller
+                  name="toDate"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="date"
+                      {...field}
+                      min={
+                        watch("fromDate")
+                          ? new Date(new Date(watch("fromDate")).getTime() + 86400000)
+                            .toISOString().split("T")[0]
+                          : today
+                      }
+                      className="p-2 rounded text-black"
+                    />
+                  )}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Contact */}
           <div className="flex flex-col sm:flex-row gap-4">
@@ -192,7 +212,6 @@ const BookingForm = () => {
                   type="text"
                   placeholder="Phone"
                   {...field}
-                  onBlur={() => trigger("phone")}
                   className="p-2 rounded w-full text-black"
                 />
               )}
@@ -205,36 +224,36 @@ const BookingForm = () => {
                   type="email"
                   placeholder="Email"
                   {...field}
-                  onBlur={() => trigger("email")}
                   className="p-2 rounded w-full text-black"
                 />
               )}
             />
           </div>
 
-          {/* Guests */}
-          <div>
-            <label className="mb-1 block">Guests</label>
-            {bookingType === "event" ? (
+          {/* Guests or Counters */}
+          {bookingType === "event" ? (
+            <div>
+              <label className="mb-1 block">Guests</label>
               <Controller
                 name="guests"
                 control={control}
                 render={({ field }) => (
-                  <select
-                    {...field}
-                    onBlur={() => trigger("guests")}
-                    className="p-2 rounded w-full text-black"
-                  >
+                  <select {...field} className="p-2 rounded w-full text-black">
                     <option value="">Select Number of Guests</option>
-                    <option value="1-10">1–10</option>
-                    <option value="11-50">11–50</option>
-                    <option value="51-100">51–100</option>
-                    <option value="100+">100+</option>
+                    <option value="0-50">0–50</option>
+                    <option value="50-100">50–100</option>
+                    <option value="100-150">100–150</option>
+                    <option value="150-250">150–250</option>
+                    <option value="250+">250+</option>
                   </select>
                 )}
               />
-            ) : (
+            </div>
+          ) : (
+            <div className="flex items-center gap-6">
+              {/* Guest Counter */}
               <div className="flex items-center gap-4">
+                <label>Guests:</label>
                 <button
                   type="button"
                   onClick={() => setRoomGuests((prev) => Math.max(1, prev - 1))}
@@ -251,10 +270,30 @@ const BookingForm = () => {
                   +
                 </button>
               </div>
-            )}
-          </div>
 
-          {/* Extra Event Fields */}
+              {/* Room Counter */}
+              <div className="flex items-center gap-4">
+                <label>Rooms:</label>
+                <button
+                  type="button"
+                  onClick={() => setRoomCount((prev) => Math.max(1, prev - 1))}
+                  className="bg-white text-black font-bold px-3 py-1 rounded"
+                >
+                  -
+                </button>
+                <span>{roomCount}</span>
+                <button
+                  type="button"
+                  onClick={() => setRoomCount((prev) => prev + 1)}
+                  className="bg-white text-black font-bold px-3 py-1 rounded"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Event Type & Message */}
           {bookingType === "event" && (
             <>
               <label>Event Type</label>
@@ -265,24 +304,12 @@ const BookingForm = () => {
                   <select {...field} className="p-2 rounded w-full text-black">
                     <option value="">Select Event Type</option>
                     <option value="wedding">Wedding</option>
-                    <option value="conference">Conference</option>
+                    <option value="engagement">Engagement</option>
+                    <option value="sangeet">Sangeet</option>
                     <option value="birthday">Birthday</option>
+                    <option value="anniversary">Anniversary</option>
+                    <option value="retirement">Retirement</option>
                     <option value="other">Other</option>
-                  </select>
-                )}
-              />
-
-              <label>Seating Type</label>
-              <Controller
-                name="seatingType"
-                control={control}
-                render={({ field }) => (
-                  <select {...field} className="p-2 rounded w-full text-black">
-                    <option value="">Select Seating Type</option>
-                    <option value="banquet">Banquet</option>
-                    <option value="theater">Theater</option>
-                    <option value="classroom">Classroom</option>
-                    <option value="boardroom">Boardroom</option>
                   </select>
                 )}
               />

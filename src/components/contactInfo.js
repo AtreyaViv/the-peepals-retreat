@@ -15,7 +15,7 @@ const ContactInfo = () => {
       <div className="w-full lg:w-[65%] text-center lg:text-left text-sm px-4 py-4 text-black bg-gradient-to-r from-[#D7BC77] via-[#C0A763] to-[#E8D3A1] bg-[length:400%_400%] animate-none lg:animate-goldGradient">
         <p>The Peepal’s Retreat, Near STP, 60 feet road,</p>
         <p>Gomti Nagar Extension, Lucknow</p>
-        <p>📞 +91-9236113434</p>
+        <p>📞 +91-7388076677</p>
         <p>✉ thepeepalsretreat@gmail.com</p>
       </div>
 

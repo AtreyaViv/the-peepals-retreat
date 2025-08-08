@@ -2,14 +2,17 @@ import React from "react";
 import logo1 from "../assets/logo11.png"; // Use your actual logo path
 
 const amenitiesData = [
-  { title: "Comfortable Bedding", desc: "Spacious rooms with king or twin-size beds for a restful sleep." },
-  { title: "Meeting Space", desc: "Professional conference room facilities available for business use." },
+  { title: "Comfortable Stay", desc: "Well-appointed rooms designed to offer maximum relaxation and comfort." },
   { title: "Event Hall", desc: "Well-equipped banquet area ideal for weddings, parties, and corporate events." },
-  { title: "Garden Area", desc: "Manicured green space perfect for relaxation or small gatherings." },
-  { title: "Health Club", desc: "Fully equipped gym to help guests stay active during their stay." },
-  { title: "Corporate Hub", desc: "Dedicated workspace and services to support business needs on the go." },
+  { title: "Lawn & Garden Venue", desc: "Expansive outdoor space ideal for vibrant events and celebrations." },
   { title: "Fast Wi-Fi", desc: "Complimentary high-speed internet access across the entire property." },
   { title: "Secure Parking", desc: "Spacious and safe parking area available for all our guests." },
+  { title: "Daily Housekeeping", desc: "Rooms are cleaned and refreshed every day for a pleasant stay." },
+  { title: "Power Backup", desc: "Uninterrupted power supply to ensure your comfort at all times." },
+  { title: "24×7 Front Desk", desc: "Round-the-clock assistance to ensure a seamless stay experience." },
+  { title: "Wedding Décor Support", desc: "Assistance with decor setup to elevate your special event." },
+  { title: "Luggage Assistance", desc: "On-request support with carrying and managing luggage." },
+  { title: "CCTV Surveillance", desc: "24/7 security coverage across the property for guest safety." },
 ];
 
 const Amenities = () => {

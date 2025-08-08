@@ -17,11 +17,12 @@ const RoomBookingTnC = () => {
           <li className={listItemStyle}>Arogya Setu app mandatory for check-in at the hotel.</li>
           <li className={listItemStyle}>It is mandatory to follow the Covid-19 protocol.</li>
           <li className={listItemStyle}>
-            It is mandatory for guests to present valid photo identification at the time of check-in. Local photo ID would not be
-            acceptable in any circumstances.
+            It is mandatory for guests to present valid photo identification at the time of check-in.
           </li>
-          <li className={listItemStyle}>The standard check-in time is 14:00 Hrs and the standard check-out time is 12:00 Hrs.</li>
-          <li className={listItemStyle}>Early check-in and late check-out is subject to availability.</li>
+          <li className={listItemStyle}>The standard check-in time is 11:00 Hrs and the standard check-out time is 11:00 Hrs.</li>
+          <li className={listItemStyle}>
+            Early check-in and late check-out are subject to availability and may incur additional charges.
+          </li>
           <li className={listItemStyle}>
             The hotel reserves the right of admission for local residents. Accommodation can be denied to guests residing in the same
             city.
@@ -38,10 +39,6 @@ const RoomBookingTnC = () => {
             Any cancellation received within 2 days prior (48 hours) to the arrival date will incur the first night charge. Failure
             to arrive at the hotel will be treated as a No-Show and will incur the first night charge.
           </li>
-          <li className={listItemStyle}>
-            Any amendment or cancellations of group rooms more than five rooms need to be updated 15 days prior to check-in.
-            Cancellation is not allowed within 15 days in group bookings. Amendments depend on availability.
-          </li>
         </ul>
       </div>
 
@@ -55,7 +52,7 @@ const RoomBookingTnC = () => {
           </li>
           <li className={listItemStyle}>
             We recognize that privacy is important to our guests, and hence The Peepal’s Retreat Privacy Policy explains our
-            practices regarding personal information we collect when you visit our hotels, restaurants, bars, our website, and when
+            practices regarding personal information we collect when you visit our hotels, restaurants, our website, and when
             you fill up a form.
           </li>
           <li className={listItemStyle}>

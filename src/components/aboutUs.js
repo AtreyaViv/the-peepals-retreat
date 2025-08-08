@@ -26,17 +26,14 @@ const AboutUs = () => {
           <p className="text-sm sm:text-base leading-7 text-gray-700 mb-4 text-justify">
             Whether you're here for a relaxing getaway, a business trip, or a grand celebration, The Peepal’s Retreat promises a memorable experience. With beautifully styled rooms, modern amenities, and warm hospitality, every corner of our hotel reflects class and calm.
           </p>
-          <p className="text-sm sm:text-base leading-7 text-gray-700 mb-4 text-justify">
-            Take in the views from our rooftop, indulge in flavors at our signature restaurant, or host flawless events in our banquet spaces surrounded by greenery. At The Peepal’s Retreat, every stay is a celebration of peace, luxury, and personalized care.
-          </p>
           <p className="text-sm sm:text-base italic text-blue-600 mt-3 text-justify">
-            One of the most cozy hotels in the locality. Rooftop restaurant is awesome.
+            One of the most cozy hotels in the locality.
           </p>
 
           <ul className="mt-4 space-y-2 pl-5 text-sm sm:text-base text-gray-700 list-none">
             <li>✅ <strong>Nature-Inspired Serenity</strong></li>
             <li>✅ <strong>Modern Comforts</strong></li>
-            <li>✅ <strong>Spacious Banquets & Rooftop Dining</strong></li>
+            <li>✅ <strong>Spacious Banquets </strong></li>
           </ul>
         </div>
 

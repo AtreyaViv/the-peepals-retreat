@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Left - Hotel Info */}
         <div className="flex-1 min-w-[250px] text-left">
           <h3 className="text-lg font-bold underline mb-4">THE PEEPAL'S RETREAT</h3>
-          <p>NEAR S.T.P., 60 FEET ROAD,</p>
+          <p>NEAR S.T.P, 60 FEET ROAD,</p>
           <p>GOMTI NAGAR EXTENSION,</p>
           <p>LUCKNOW-226010</p>
           <p className="text-sm mt-4">© THEPEEPALSRETREAT.COM</p>
@@ -18,8 +18,9 @@ const Footer = () => {
         {/* Middle - Contact Info */}
         <div className="flex-1 min-w-[250px] text-left">
           <h3 className="text-lg font-bold underline mb-4">CONTACT</h3>
-          <p><strong>Mobile:</strong> +91-923613434</p>
-          <p><strong>Phone:</strong> <span className="font-bold">0522-******</span></p>
+          <p><strong>Booking:</strong> +91-7388076677</p>
+          <p><strong>Reception:</strong> <span className="font-bold"> +91-7388076677</span></p>
+          <p><strong>Office:</strong> +91-9236113434</p>
           <p><strong>Reservations:</strong></p>
           <p className="font-semibold">FOM@THEPEEPALSRETREAT.COM</p>
           <p className="font-semibold">SALESMANAGER@THEPEEPALSRETREAT.COM</p>
