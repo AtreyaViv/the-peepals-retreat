@@ -9,7 +9,6 @@ const amenitiesData = [
   { title: "Secure Parking", desc: "Spacious and safe parking area available for all our guests." },
   { title: "Daily Housekeeping", desc: "Rooms are cleaned and refreshed every day for a pleasant stay." },
   { title: "Power Backup", desc: "Uninterrupted power supply to ensure your comfort at all times." },
-  { title: "24×7 Front Desk", desc: "Round-the-clock assistance to ensure a seamless stay experience." },
   { title: "Wedding Décor Support", desc: "Assistance with decor setup to elevate your special event." },
   { title: "Luggage Assistance", desc: "On-request support with carrying and managing luggage." },
   { title: "CCTV Surveillance", desc: "24/7 security coverage across the property for guest safety." },

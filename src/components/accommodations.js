@@ -9,9 +9,9 @@ const Accommodations = () => {
     <div className="bg-[#f8f8f8] min-h-fit">
       {/* Banner Section */}
       <PageHeader
-        title="Rooms & Suite"
+        title="Rooms"
         backgroundImage={accHeader}
-        breadcrumb={["HOME", "ROOMS & SUITE"]}
+        breadcrumb={["HOME", "ROOMS"]}
       />
 
       {/* Introduction Section */}

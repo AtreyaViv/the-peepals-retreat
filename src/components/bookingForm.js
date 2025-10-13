@@ -4,31 +4,29 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import FlashMessage from "./flashMesage";
 
-const schema = yup.object().shape({
-  firstName: yup.string().required("First name is required"),
-  lastName: yup.string().required("Last name is required"),
-  phone: yup.string().required("Phone number is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
-  eventDate: yup.date().when("bookingType", {
-    is: "event",
-    then: (schema) => schema.required("Event date is required"),
-  }),
-  fromDate: yup.date().when("bookingType", {
-    is: "room",
-    then: (schema) => schema.required("Check-in date is required"),
-  }),
-  toDate: yup.date().when("bookingType", {
-    is: "room",
-    then: (schema) => schema
-      .required("Check-out date is required")
-      .min(yup.ref("fromDate"), "Check-out must be after check-in"),
-  }),
-  guests: yup.string().when("bookingType", {
-    is: "event",
-    then: yup.string().required("Select number of guests"),
-  }),
-  message: yup.string(),
-});
+// Dynamic schema generator
+const getSchema = (bookingType) =>
+  yup.object().shape({
+    firstName: yup.string().required("First name is required"),
+    lastName: yup.string().required("Last name is required"),
+    phone: yup.string().required("Phone number is required"),
+    email: yup.string().email("Invalid email").required("Email is required"),
+
+    ...(bookingType === "event" && {
+      eventDate: yup.date().required("Event date is required"),
+      guests: yup.string().required("Select number of guests"),
+    }),
+
+    ...(bookingType === "room" && {
+      fromDate: yup.date().required("Check-in date is required"),
+      toDate: yup
+        .date()
+        .required("Check-out date is required")
+        .min(yup.ref("fromDate"), "Check-out must be after check-in"),
+    }),
+
+    message: yup.string(),
+  });
 
 const BookingForm = () => {
   const [bookingType, setBookingType] = useState("event");
@@ -37,13 +35,8 @@ const BookingForm = () => {
   const [flash, setFlash] = useState({ message: "", type: "" });
   const today = new Date().toISOString().split("T")[0];
 
-  const {
-    handleSubmit,
-    control,
-    trigger,
-    watch,
-  } = useForm({
-    resolver: yupResolver(schema),
+  const { handleSubmit, control, trigger, watch, reset } = useForm({
+    resolver: yupResolver(getSchema(bookingType)),
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -69,11 +62,17 @@ const BookingForm = () => {
         bookingType,
       };
       console.log("Form Submitted:", finalData);
-      setFlash({ message: "Request Submitted, We'll get back to you!", type: "success" });
+      setFlash({
+        message: "Request Submitted, We'll get back to you!",
+        type: "success",
+      });
+      reset(); // reset form after success
     } catch (error) {
-      setFlash({ message: "Something went wrong. Please try again.", type: "error" });
+      setFlash({
+        message: "Something went wrong. Please try again.",
+        type: "error",
+      });
     }
-
   };
 
   return (
@@ -83,33 +82,52 @@ const BookingForm = () => {
           {/* Toggle Switch */}
           <div className="flex justify-between text-sm font-medium mb-6 bg-[#2e4f3d] rounded-full relative overflow-hidden cursor-pointer">
             <span
-              className={`flex-1 text-center py-2 z-10 ${bookingType === "room" ? "text-[#1f3b2e] font-bold" : "text-white"
-                }`}
-              onClick={() => setBookingType("room")}
+              className={`flex-1 text-center py-2 z-10 ${
+                bookingType === "room"
+                  ? "text-[#1f3b2e] font-bold"
+                  : "text-white"
+              }`}
+              onClick={() => {
+                setBookingType("room");
+                trigger(); // revalidate on toggle
+              }}
             >
               Room Booking
             </span>
             <span
-              className={`flex-1 text-center py-2 z-10 ${bookingType === "event" ? "text-[#1f3b2e] font-bold" : "text-white"
-                }`}
-              onClick={() => setBookingType("event")}
+              className={`flex-1 text-center py-2 z-10 ${
+                bookingType === "event"
+                  ? "text-[#1f3b2e] font-bold"
+                  : "text-white"
+              }`}
+              onClick={() => {
+                setBookingType("event");
+                trigger(); // revalidate on toggle
+              }}
             >
               Event Booking
             </span>
             <div
-              className={`absolute top-0 bottom-0 left-0 w-1/2 bg-white rounded-full transition-transform duration-300 ${bookingType === "event" ? "translate-x-full" : ""
-                }`}
+              className={`absolute top-0 bottom-0 left-0 w-1/2 bg-white rounded-full transition-transform duration-300 ${
+                bookingType === "event" ? "translate-x-full" : ""
+              }`}
             />
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4 text-sm">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-4 text-sm"
+          >
             {/* Initials + Name */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Controller
                 name="initials"
                 control={control}
                 render={({ field }) => (
-                  <select {...field} className="p-2 rounded w-full bg-white text-black">
+                  <select
+                    {...field}
+                    className="p-2 rounded w-full bg-white text-black"
+                  >
                     <option value="Mr">Mr</option>
                     <option value="Mrs">Mrs</option>
                     <option value="Ms">Ms</option>
@@ -175,8 +193,11 @@ const BookingForm = () => {
                         min={today}
                         max={
                           watch("toDate")
-                            ? new Date(new Date(watch("toDate")).getTime() - 86400000)
-                              .toISOString().split("T")[0]
+                            ? new Date(
+                                new Date(watch("toDate")).getTime() - 86400000
+                              )
+                                .toISOString()
+                                .split("T")[0]
                             : undefined
                         }
                         onChange={(e) => {
@@ -199,8 +220,11 @@ const BookingForm = () => {
                         {...field}
                         min={
                           watch("fromDate")
-                            ? new Date(new Date(watch("fromDate")).getTime() + 86400000)
-                              .toISOString().split("T")[0]
+                            ? new Date(
+                                new Date(watch("fromDate")).getTime() + 86400000
+                              )
+                                .toISOString()
+                                .split("T")[0]
                             : today
                         }
                         className="p-2 rounded text-black"
@@ -351,7 +375,6 @@ const BookingForm = () => {
         type={flash.type}
         onClose={() => setFlash({ message: "", type: "" })}
       />
-
     </>
   );
 };
